@@ -1,17 +1,16 @@
 import React from 'react';
 
-export default class Clock extends React.Component {
+export default class Button extends React.Component {
   constructor(props) {
-    console.log('clock props', props);
     super(props);
   }
 
-  createClock() {
-    return <div>Clock</div>;
+  createButton() {
+    return <div>Button will go here</div>;
   }
 
   render() {
-    const clock = this.createClock();
-    return <div>{clock}</div>;
+    const button = this.createButton();
+    return <div>{button}</div>;
   }
 }

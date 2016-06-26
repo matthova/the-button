@@ -113,7 +113,7 @@ class KoaApp {
       <title>Button Counter</title>
       <link rel=stylesheet href=/styles.css>
       <div id=app>${appHtml}</div>
-      <script>var clock=${jsVariables}</script>
+      <script>var button=${jsVariables}</script>
       <script src="/vendorJs/socket.io.js"></script>
       <script src="/bundle.js"></script>
      `;

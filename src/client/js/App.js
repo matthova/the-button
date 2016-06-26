@@ -1,4 +1,4 @@
-/* global clock */
+/* global button */
 import React from 'react';
 
 export default class App extends React.Component {
@@ -8,8 +8,8 @@ export default class App extends React.Component {
 
   render() {
     const childrenComponents = React.Children.map(this.props.children, child => {
-      // mapping through all of the children components in order to inject Clock app objects
-      return React.cloneElement(child, clock);
+      // mapping through all of the children components in order to inject Button app objects
+      return React.cloneElement(child, button);
     });
     return (
       <div>

@@ -1,4 +1,4 @@
-# Clock
+# The Button
 
 An es7 friendly Example React / Koa app
 
@@ -9,6 +9,9 @@ npm install
 
 Create a '.env' file in the project's root folder with the following information:  
 ```
+username={Your computer's user name}
+password=postgres
+dbname=postgres
 PORT=9000
 ```
 
@@ -18,7 +21,7 @@ PORT=9000
 npm test
 ```
 
-#### Run the clock
+#### Start the button
 ```
 npm start
 ```
