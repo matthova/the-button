@@ -109,7 +109,7 @@ class KoaApp {
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Button Counter</title>
       <link rel=stylesheet href=/styles.css>
-      <div id=app>${appHtml}</div>
+      <div id=app><div>${appHtml}</div></div>
       <script>var button=${jsVariables}</script>
       <script src="/vendorJs/socket.io.js"></script>
       <script src="/bundle.js"></script>
