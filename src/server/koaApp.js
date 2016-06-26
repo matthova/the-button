@@ -18,6 +18,7 @@ const RouterContext = require(`react-router`).RouterContext;
 // NOTE THIS FILE IS COPIED IN BY GULP FROM CLIENT/JS
 const routes = require(`./react/routes`);
 
+// Add middleware here
 const Button = require(`./middleware/button`);
 
 class KoaApp {
@@ -75,11 +76,9 @@ class KoaApp {
           } else if (redirect) {
             ctx.redirect(redirect.pathname + redirect.search);
           } else if (props) {
-            debugger;
-            const time = button.getTimeSinceButtonPushed();
-            const jsVariables = JSON.stringify({ time });
-            const appHtml = renderToString(React.createElement(`div`, Object.assign({}, props, jsVariables)));
-            ctx.body = this.renderPage(appHtml, jsVariables);
+            props.params.lastPushed = button.getTimeSinceButtonPushed();
+            const appHtml = renderToString(<RouterContext {...props}/>);
+            ctx.body = this.renderPage(appHtml);
           } else {
             // Redirect to an error page if making a bad api query
             if (ctx.req.url.indexOf(`/v1`) !== -1) {

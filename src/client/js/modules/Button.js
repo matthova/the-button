@@ -6,7 +6,7 @@ export default class Button extends React.Component {
   }
 
   createButton() {
-    return <div>Button will go here</div>;
+    return <div>Time since last pushed: { this.props.params.lastPushed }</div>;
   }
 
   render() {

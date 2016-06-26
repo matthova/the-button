@@ -25,7 +25,7 @@ try {
    */
   if (process.env.PORT === undefined) {
     const errorMessage = `PORT must be defined in your .env file`;
-    app.context.logger.error(errorMEssage);
+    app.context.logger.error(errorMessage);
     throw errorMessage;
   }
   const port = normalizePort(process.env.PORT);
