@@ -7,7 +7,7 @@ const getTime = (self) => {
   const requestDescription = `Get time since button pushed`;
   self.router.get(`${self.routeEndpoint}/`, async (ctx) => {
     try {
-      const reply = self.getConductor();
+      const reply = self.getTimeSinceButtonPushed();
       ctx.status = 200;
       ctx.body = new Response(ctx, requestDescription, reply);
     } catch (ex) {
