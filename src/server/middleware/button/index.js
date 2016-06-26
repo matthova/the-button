@@ -20,6 +20,7 @@ class Button {
     this.router = router;
 
     this.lastPushed = undefined;
+    this.ButtonModel = undefined;
   }
 
 /*******************************************************************************
@@ -30,7 +31,8 @@ class Button {
    */
   async initialize() {
     try {
-      await this.loadModel();
+      this.ButtonModel = await buttonModel(this.app);
+      await this.initializeTime();
       await this.setupRouter();
       this.logger.info(`Button instance initialized`);
     } catch (ex) {
@@ -38,8 +40,18 @@ class Button {
     }
   }
 
-  async loadModel() {
-    this.ButtonModel = await buttonModel(this.app);
+  async initializeTime() {
+    // Load the time that the button was last pushed
+    // If the database entry doesn't exist yet, create it now
+    const timeFromDb = await this.ButtonModel.findOrCreate(
+      {
+        where: { id: 1 },
+        defaults: {
+          lastPushed: new Date().getTime(),
+        },
+      }
+    );
+    this.lastPushed = Number(timeFromDb[0].dataValues.lastPushed);
   }
 
   /**
