@@ -1,0 +1,8 @@
+{
+  "name": "Clock",
+  "description": "A Clock",
+  "repository": "",
+  "logo": "",
+  "keywords": [],
+  "image": "heroku/nodejs"
+}
