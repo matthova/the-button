@@ -1,5 +1,5 @@
 module.exports = {
   apiVersion: `v1`,
-  logFileName: `clock.log`,
-  testLogFileName: `clock-test.log`,
+  logFileName: `button.log`,
+  testLogFileName: `button-test.log`,
 };
