@@ -9,4 +9,16 @@ body {
   a {
     color: #00B7FF;
   }
+  .button-container {
+    margin: auto;
+    text-align: center;
+  }
+  .the-button {
+    background-color: red;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    cursor: pointer;
+  }
 }

@@ -21,11 +21,11 @@ const getTime = (self) => {
 /**
  * Handle all logic at this endpoint for reading all of the jobs
  */
-const updateTime = (self) => {
+const resetTime = (self) => {
   const requestDescription = `Update Time`;
   self.router.post(`${self.routeEndpoint}/`, async (ctx) => {
     try {
-      const reply = await self.updateTime();
+      const reply = await self.resetTime();
       ctx.status = 200;
       ctx.body = new Response(ctx, requestDescription, reply);
     } catch (ex) {
@@ -38,7 +38,7 @@ const updateTime = (self) => {
 
 const clockRoutes = (self) => {
   getTime(self);
-  updateTime(self);
+  resetTime(self);
 };
 
 module.exports = clockRoutes;

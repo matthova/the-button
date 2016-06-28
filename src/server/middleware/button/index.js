@@ -81,7 +81,7 @@ class Button {
     return timeSinceButtonPushed;
   }
 
-  async updateTime() {
+  async resetTime() {
     this.lastPushed = new Date().getTime();
     await this.buttonDbObject.update({ lastPushed: this.lastPushed });
     this.app.io.emit('timeUpdated', 0);
