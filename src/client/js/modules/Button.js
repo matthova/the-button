@@ -3,27 +3,29 @@ import React from 'react';
 export default class Button extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      lastPushed: props.lastPushed,
+    };
   }
 
   componentDidMount() {
     if (process.env.PORT === undefined) {
       setInterval(() => {
         try {
-          const newNumber = this.state.lastPushed + 1;
+          const newNumber = this.state.lastPushed + 1000;
           this.setState({
             lastPushed: newNumber,
           });
-          console.log('new number', newNumber);
         } catch (ex) {
-          console.log('wtf', ex);
+          console.log('Time update failed', ex);
         }
       }, 1000);
     }
   }
-  componentWillUpdate() {
-    console.log('sweet props', this.props);
+
+  componentWillReceiveProps(nextProps) {
     this.setState({
-      lastPushed: this.props.lastPushed,
+      lastPushed: nextProps.lastPushed,
     });
   }
 
@@ -38,7 +40,6 @@ export default class Button extends React.Component {
   }
 
   render() {
-    console.log('time to re-render')
     const button = this.createButton();
     return <div>{button}</div>;
   }

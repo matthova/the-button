@@ -21,6 +21,7 @@ class Button {
 
     this.lastPushed = undefined;
     this.ButtonModel = undefined;
+    this.buttonDbObject = undefined;
   }
 
 /*******************************************************************************
@@ -51,6 +52,7 @@ class Button {
         },
       }
     );
+    this.buttonDbObject = timeFromDb[0];
     this.lastPushed = Number(timeFromDb[0].dataValues.lastPushed);
   }
 
@@ -79,9 +81,11 @@ class Button {
     return timeSinceButtonPushed;
   }
 
-  updateTime() {
+  async updateTime() {
     this.lastPushed = new Date().getTime();
+    await this.buttonDbObject.update({ lastPushed: this.lastPushed });
     this.app.io.emit('timeUpdated', 0);
+    return this.lastPushed;
   }
 }
 

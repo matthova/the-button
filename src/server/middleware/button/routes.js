@@ -25,7 +25,7 @@ const updateTime = (self) => {
   const requestDescription = `Update Time`;
   self.router.post(`${self.routeEndpoint}/`, async (ctx) => {
     try {
-      const reply = self.updateTime();
+      const reply = await self.updateTime();
       ctx.status = 200;
       ctx.body = new Response(ctx, requestDescription, reply);
     } catch (ex) {

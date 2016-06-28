@@ -1,12 +1,17 @@
-/* global button, io */
+/* global APP_VAR, io */
 import React from 'react';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      lastPushed: props.params.lastPushed,
-    };
+    try {
+      this.state = APP_VAR;
+    } catch (ex) {
+      this.state = props.params;
+    }
+  }
+
+  componentDidMount() {
     try {
       this.socket = io();
       this.socket.on('timeUpdated', (data) => {
