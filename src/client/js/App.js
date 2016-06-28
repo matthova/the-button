@@ -1,11 +1,22 @@
-/* global button */
+/* global button, io */
 import React from 'react';
 
 export default class App extends React.Component {
   constructor(props) {
-    console.log('muh propz', props);
     super(props);
-    this.state = { foo: 'bar' };
+    this.state = {
+      lastPushed: props.params.lastPushed,
+    };
+    try {
+      this.socket = io();
+      this.socket.on('timeUpdated', (data) => {
+        this.setState({
+          lastPushed: data,
+        });
+      });
+    } catch (ex) {
+      // Not possible on server side
+    }
   }
 
   render() {

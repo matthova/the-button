@@ -9,6 +9,7 @@ const IO = require(`koa-socket`);
 const path = require(`path`);
 const Sequelize = require(`sequelize`);
 const router = require(`koa-router`)();
+const _ = require(`underscore`);
 
 const React = require(`react`);
 const renderToString = require(`react-dom/server`).renderToString;
@@ -76,9 +77,12 @@ class KoaApp {
           } else if (redirect) {
             ctx.redirect(redirect.pathname + redirect.search);
           } else if (props) {
-            props.params.lastPushed = button.getTimeSinceButtonPushed();
+            const serverProps = {
+              lastPushed: button.getTimeSinceButtonPushed()
+            };
+            _.extend(props.params, serverProps);
             const appHtml = renderToString(<RouterContext {...props}/>);
-            ctx.body = this.renderPage(appHtml);
+            ctx.body = this.renderPage(appHtml, serverProps);
           } else {
             // Redirect to an error page if making a bad api query
             if (ctx.req.url.indexOf(`/v1`) !== -1) {
@@ -101,7 +105,7 @@ class KoaApp {
     });
   }
 
-  renderPage(appHtml, jsVariables) {
+  renderPage(appHtml, jsVariables = {}) {
     return `
       <!doctype html public="storage">
       <html>
@@ -110,11 +114,17 @@ class KoaApp {
       <title>Button Counter</title>
       <link rel=stylesheet href=/styles.css>
       <div id=app><div>${appHtml}</div></div>
-      <script>var button=${jsVariables}</script>
+      <script>var APP_VAR=${this.safeStringify(jsVariables)}</script>
       <script src="/vendorJs/socket.io.js"></script>
       <script src="/bundle.js"></script>
      `;
   }
+
+  // A utility function to safely escape JSON for embedding in a <script> tag
+  safeStringify(obj) {
+    return JSON.stringify(obj).replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--')
+  }
+
 }
 
 module.exports = KoaApp;

@@ -81,6 +81,7 @@ class Button {
 
   updateTime() {
     this.lastPushed = new Date().getTime();
+    this.app.io.emit('timeUpdated', 0);
   }
 }
 
